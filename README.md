@@ -1,4 +1,5 @@
 # vue-blockchain-mockup
+Project used to learn VUE framework as I build my CV.
 
 ## Project setup
 ```
@@ -20,5 +21,5 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### References
+Platzi Course: [Curso Básico de VUE](https://platzi.com/clases/vuejs/)

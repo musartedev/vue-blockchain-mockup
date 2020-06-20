@@ -2,6 +2,8 @@
   "name": "vue-blockchain-mockup",
   "version": "0.1.0",
   "private": true,
+  "author": "Mariangelica Useche <mariangelica.useche@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
