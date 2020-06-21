@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "author": "Mariangelica Useche <mariangelica.useche@gmail.com>",
-  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -11,9 +10,11 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "tailwindcss": "^1.1.2",
     "vue": "^2.6.11"
   },
   "devDependencies": {
+    "@ianaya89/vue-cli-plugin-tailwind": "~1.1.0",
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
@@ -24,5 +25,6 @@
     "eslint-plugin-vue": "^6.2.2",
     "prettier": "^1.19.1",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "license": "MIT"
 }
