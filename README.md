@@ -1,5 +1,5 @@
 # vue-blockchain-mockup
-Project used to learn VUE framework as I build my CV.
+Project used to learn VUE framework.
 
 ## Project setup
 ```
