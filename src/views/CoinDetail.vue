@@ -1,6 +1,13 @@
 <template>
   <div class="flex-col">
-    <template v-if="asset.id">
+    <div class="flex justify-center">
+      <bounce-loader
+        :loading="loading"
+        :color="'#68d391'"
+        :size="100"
+      ></bounce-loader>
+    </div>
+    <template v-if="asset.id && !loading">
       <div class="flex flex-col sm:flex-row justify-around items-center">
         <div class="flex flex-col items-center">
           <img
@@ -65,12 +72,20 @@
           <span class="text-xl"></span>
         </div>
       </div>
+      <line-chart
+        class="my-10"
+        :colors="['orange']"
+        :min="min"
+        :max="max"
+        :data="history.map(h => [h.date, parseFloat(h.priceUsd).toFixed(2)])"
+      />
     </template>
   </div>
 </template>
 
 <script>
 import api from "@/api";
+import { BounceLoader } from "@saeris/vue-spinners";
 
 export default {
   name: "CoinDetail",
@@ -78,9 +93,12 @@ export default {
   data() {
     return {
       asset: {},
-      history: []
+      history: [],
+      loading: false
     };
   },
+
+  components: { BounceLoader },
 
   computed: {
     min() {
@@ -108,6 +126,7 @@ export default {
 
   methods: {
     async getCoin() {
+      this.loading = true;
       const id = this.$route.params.id;
 
       const [asset, history] = await Promise.all([
@@ -116,6 +135,7 @@ export default {
       ]);
       this.asset = asset;
       this.history = history;
+      this.loading = false;
     }
   }
 };
