@@ -7,4 +7,29 @@ const getAssets = async () => {
   return res.data;
 };
 
-export default { getAssets };
+const getAsset = async coin => {
+  let res = await fetch(`${url}/assets/${coin}`);
+  res = await res.json();
+
+  return res.data;
+};
+
+const getAssetHistory = async coin => {
+  const now = new Date();
+  const end = now.getTime();
+  now.setDate(now.getDate() - 1);
+  const start = now.getTime();
+
+  let res = await fetch(
+    `${url}/assets/${coin}/history?interval=h1&start=${start}&end=${end}`
+  );
+
+  res = await res.json();
+  return res.data;
+};
+
+export default {
+  getAssets,
+  getAsset,
+  getAssetHistory
+};
