@@ -34,9 +34,17 @@
         <td>
           <b>{{ a.name }}</b>
         </td>
-        <td>{{ a.changePercent24Hr }}</td>
-        <td>{{ a.marketCapUsd }}</td>
-        <td>{{ a.priceUsd }}</td>
+        <td>{{ a.priceUsd | dollar }}</td>
+        <td>{{ a.marketCapUsd | dollar }}</td>
+        <td
+          :class="
+            a.changePercent24Hr.includes('-')
+              ? 'text-red-600'
+              : 'text-green-600'
+          "
+        >
+          {{ a.changePercent24Hr | percent }}
+        </td>
         <td class="hidden sm:block"></td>
       </tr>
     </tbody>
@@ -45,24 +53,24 @@
 
 <script>
 export default {
-  name: 'PxAssetsTable',
+  name: "PxAssetsTable",
 
   props: {
     assets: {
       type: Array,
-      default: () => [],
-    },
-  },
+      default: () => []
+    }
+  }
 };
 </script>
 
 <style scoped>
 .up::before {
-  content: '👆';
+  content: "👆";
 }
 
 .down::before {
-  content: '👇';
+  content: "👇";
 }
 
 td {
