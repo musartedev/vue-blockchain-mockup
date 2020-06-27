@@ -21,6 +21,7 @@
       >
         <td>
           <img
+            v-if="a.symbol"
             class="w-6 h-6"
             :src="
               `https://static.coincap.io/assets/icons/${a.symbol.toLowerCase()}@2x.png`
@@ -42,6 +43,7 @@
         <td>{{ a.priceUsd | dollar }}</td>
         <td>{{ a.marketCapUsd | dollar }}</td>
         <td
+          v-if="a.changePercent24Hr"
           :class="
             a.changePercent24Hr.includes('-')
               ? 'text-red-600'

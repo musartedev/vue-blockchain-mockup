@@ -79,6 +79,35 @@
         :max="max"
         :data="history.map(h => [h.date, parseFloat(h.priceUsd).toFixed(2)])"
       />
+
+      <h3 class="text-xl my-10">Mejores Ofertas de Cambio</h3>
+      <table>
+        <tr
+          v-for="m in markets"
+          :key="`${m.exchangeId}-${m.priceUsd}`"
+          class="border-b"
+        >
+          <td>
+            <b>{{ m.exchangeId }}</b>
+          </td>
+          <td>{{ m.priceUsd | dollar }}</td>
+          <td>{{ m.baseSymbol }} / {{ m.quoteSymbol }}</td>
+          <td>
+            <px-button @custom-click="getWebsite(m)" v-if="!m.url"
+              ><slot>
+                ObtenerLink
+              </slot></px-button
+            >
+            <a
+              v-else
+              class="hover:underline text-green-600"
+              target="_blank"
+              :href="m.url"
+              >{{ m.url }}</a
+            >
+          </td>
+        </tr>
+      </table>
     </template>
   </div>
 </template>
@@ -86,6 +115,7 @@
 <script>
 import api from "@/api";
 import { BounceLoader } from "@saeris/vue-spinners";
+import PxButton from "@/components/PxButton";
 
 export default {
   name: "CoinDetail",
@@ -94,11 +124,12 @@ export default {
     return {
       asset: {},
       history: [],
-      loading: false
+      loading: false,
+      markets: []
     };
   },
 
-  components: { BounceLoader },
+  components: { BounceLoader, PxButton },
 
   computed: {
     min() {
@@ -125,16 +156,22 @@ export default {
   },
 
   methods: {
+    async getWebsite(exchange) {
+      const res = await api.getExchange(exchange.exchangeId);
+      this.$set(exchange, "url", res.exchangeUrl);
+    },
     async getCoin() {
       this.loading = true;
       const id = this.$route.params.id;
 
-      const [asset, history] = await Promise.all([
+      const [asset, history, markets] = await Promise.all([
         api.getAsset(id),
-        api.getAssetHistory(id)
+        api.getAssetHistory(id),
+        api.getMarkets(id)
       ]);
       this.asset = asset;
       this.history = history;
+      this.markets = markets;
       this.loading = false;
     }
   }
