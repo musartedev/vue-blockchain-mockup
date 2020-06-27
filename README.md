@@ -1,6 +1,9 @@
-# vue-blockchain-mockup
+# 🤑 vue-blockchain-mockup
 Project used to learn VUE framework.
+[
+DEMO](https://mus-vue-exchange.netlify.app/)
 
+![DEMO](http://g.recordit.co/ROCUCFEBOK.gif)
 ## Project setup
 ```
 npm install
